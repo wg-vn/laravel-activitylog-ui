@@ -10,13 +10,7 @@
 
 ## 📖 Documentation
 
-📚 **[Complete Documentation](https://www.sadeeq.dev/docs/laravel-activitylog-ui)** - Comprehensive guide with advanced features, customization options, and troubleshooting.
-
----
-
-## ⬆️ Upgrading from v1.x
-
-v3.0 is a breaking release: the UI now requires authentication by default, exports are scoped to whoever created them, and unusable parameters are refused rather than quietly reinterpreted. v2.0 before it moved to Spatie laravel-activitylog v5. See **[UPGRADING.md](UPGRADING.md)** for both paths.
+📚 **[Complete Documentation](DOCUMENTATION.md)** - Comprehensive guide with advanced features, customization options, and troubleshooting.
 
 ---
 
