@@ -25,8 +25,7 @@ v3.0 is a breaking release: the UI now requires authentication by default, expor
 * Table, Timeline & Analytics dashboards
 * Powerful filter panel (date presets, events, users, subjects, search)
 * Saved views, per-page & sorting preferences
-* Export to **CSV / Excel / PDF / JSON**  
-  \* Optional Excel & PDF exports require additional packages (see below)
+* Export to **CSV / Excel / PDF / JSON**
 * Real-time count & pagination powered by Laravel cache
 * Authorization gate, middleware & granular access lists
 * Tailwind CSS & Alpine.js – no build step required
@@ -36,21 +35,10 @@ v3.0 is a breaking release: the UI now requires authentication by default, expor
 * PHP ≥ 8.4
 * Laravel 12 | 13
 * [spatie/laravel-activitylog](https://github.com/spatie/laravel-activitylog) ≥ 5.0 (already logging your activities)
+* [paperdoc-dev/paperdoc-lib](https://paperdoc.dev/) ^1.1 (Excel & PDF exports)
 * Database table `activity_log` with Spatie v5’s schema (includes `attribute_changes` column)
 
 > **On Laravel 12** Composer resolves `spatie/laravel-activitylog` to **5.0.0**, because 5.1.0 requires `illuminate/* ^13.0`. The schema and everything in this package behave the same on both; you are simply pinned to 5.0.x until you move to Laravel 13. Verified against Laravel 12.66 / Spatie 5.0.0 and Laravel 13.25 / Spatie 5.1.0.
-
-### Optional (for export)
-
-| Feature | Package | Version |
-|---------|---------|---------|
-| Excel (XLSX) | `maatwebsite/excel` | ^3.1 |
-| PDF | `barryvdh/laravel-dompdf` | ^2.0 |
-
-Add them when you need those formats:
-```bash
-composer require maatwebsite/excel barryvdh/laravel-dompdf
-```
 
 ---
 
@@ -185,9 +173,7 @@ Notes:
 
 ## 📤 Exports
 
-* **CSV & JSON** work out-of-the-box.
-* **Excel (XLSX)** requires `maatwebsite/excel` – otherwise we gracefully fall back to CSV.
-* **PDF** requires `barryvdh/laravel-dompdf` – otherwise we fall back to JSON.
+* **CSV / Excel (XLSX) / PDF / JSON** all work out-of-the-box, powered by [paperdoc-dev/paperdoc-lib](https://paperdoc.dev/).
 * Large exports can be **queued**; enable `exports.queue.enabled`.
 
 ---

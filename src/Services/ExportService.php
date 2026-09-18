@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\App;
-use Maatwebsite\Excel\Facades\Excel;
+use Paperdoc\Document\Style\PageSetup;
+use Paperdoc\Document\Table;
+use Paperdoc\Enum\PageSize;
+use Paperdoc\Facades\Paperdoc;
 use WgVn\ActivitylogUi\Models\Activity;
-use WgVn\ActivitylogUi\Exports\ActivitiesExport;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class ExportService
 {
@@ -265,16 +266,17 @@ class ExportService
      */
     protected function exportToExcel(Collection $activities, array $options): string
     {
-        // Check if Laravel Excel is available
-        if (!class_exists(\Maatwebsite\Excel\Facades\Excel::class)) {
-            // Fallback to CSV format
-            return $this->exportToCsv($activities, $options);
-        }
-
         $filename = $this->generateFilename('xlsx');
         $path = $this->getExportPath($filename);
 
-        $this->assertWritten(Excel::store(new ActivitiesExport($activities, $options), $path, $this->diskName()), $path);
+        $title = $options['title'] ?? 'Activity Log Report';
+
+        $doc = Paperdoc::create('xlsx', $title);
+        $section = $doc->openSection();
+        $section->addHeading($title, 1);
+        $section->addElement($this->buildActivitiesTable($activities, $options));
+
+        $this->assertWritten($this->disk()->put($path, Paperdoc::renderAs($doc, 'xlsx')), $path);
 
         return $path;
     }
@@ -284,36 +286,86 @@ class ExportService
      */
     protected function exportToPdf(Collection $activities, array $options): string
     {
-        // Check if DomPDF is available
-        if (!class_exists(\Barryvdh\DomPDF\Facade\Pdf::class)) {
-            // Fallback to JSON format
-            return $this->exportToJson($activities, $options);
-        }
-
         $filename = $this->generateFilename('pdf');
         $path = $this->getExportPath($filename);
 
-        $data = [
-            'activities' => $activities,
-            'title' => $options['title'] ?? 'Activity Log Report',
-            'generated_at' => now(),
-            // Both keys: the shipped view reads $filters, while filters_applied is
-            // what published views may already reference.
-            'filters' => $options['applied_filters'] ?? [],
-            'filters_applied' => $options['applied_filters'] ?? [],
-            'total_count' => $activities->count(),
-            'export_options' => $options,
-        ];
+        $title = $options['title'] ?? 'Activity Log Report';
+        $generatedAt = now();
+        $filters = $options['applied_filters'] ?? [];
 
-        $pdf = Pdf::loadView('activitylog-ui::exports.pdf', $data);
+        $doc = Paperdoc::create('pdf', $title);
+        $section = $doc->openSection();
 
-        if ($options['orientation'] ?? 'portrait' === 'landscape') {
-            $pdf->setPaper('a4', 'landscape');
+        if (($options['orientation'] ?? 'portrait') === 'landscape') {
+            $section->setPageSize(PageSize::A4, PageSetup::ORIENTATION_LANDSCAPE);
         }
 
-        $this->assertWritten($this->disk()->put($path, $pdf->output()), $path);
+        $section->addHeading($title, 1);
+        $section->addParagraph('Generated At: ' . $generatedAt->format('F j, Y \a\t g:i A T'));
+        $section->addParagraph('Total Records: ' . number_format($activities->count()));
+
+        $filterSummary = collect($filters)
+            ->filter()
+            ->map(fn ($value, $key) => ucfirst(str_replace('_', ' ', $key)) . ': ' . (is_array($value) ? implode(', ', $value) : $value))
+            ->implode(', ');
+
+        if ($filterSummary !== '') {
+            $section->addParagraph('Filters Applied: ' . $filterSummary);
+        }
+
+        $section->addElement($this->buildActivitiesTable($activities, $options));
+
+        $this->assertWritten($this->disk()->put($path, Paperdoc::renderAs($doc, 'pdf')), $path);
 
         return $path;
+    }
+
+    /**
+     * Build the activities table shared by the Excel and PDF exports.
+     */
+    protected function buildActivitiesTable(Collection $activities, array $options): Table
+    {
+        $headings = $options['columns'] ?? [
+            'ID', 'Date & Time', 'User', 'Event', 'Subject', 'Description', 'Changes',
+        ];
+
+        $columns = $options['columns'] ?? [
+            'id', 'date_time', 'causer', 'event', 'subject', 'description', 'changes'
+        ];
+
+        $table = Table::make();
+        $table->setHeaders($headings);
+
+        foreach ($activities as $activity) {
+            $table->addRowFromArray($this->mapActivityToRow($activity, $columns));
+        }
+
+        return $table;
+    }
+
+    /**
+     * Map an activity to a row of strings for the Excel/PDF table, keyed by the
+     * same column set prepareCsvData() uses so both exports stay in sync.
+     */
+    protected function mapActivityToRow(Activity $activity, array $columns): array
+    {
+        return array_map(function ($column) use ($activity) {
+            return (string) match ($column) {
+                'id' => $activity->id,
+                'date_time' => $activity->created_at->format('Y-m-d H:i:s'),
+                'causer' => $activity->causer_name ?? 'System',
+                'event' => $activity->event ?? 'unknown',
+                'subject' => $activity->subject_type ?
+                    $activity->subject_type . ' #' . $activity->subject_id :
+                    'N/A',
+                'description' => $activity->description,
+                'changes' => $activity->hasAttributeChanges() ?
+                    $activity->getChangesSummary() :
+                    'No changes tracked',
+                'properties' => json_encode($activity->properties),
+                default => $activity->{$column} ?? '',
+            };
+        }, $columns);
     }
 
     /**

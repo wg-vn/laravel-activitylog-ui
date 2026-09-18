@@ -40,12 +40,9 @@
     ],
     "require": {
         "php": "^8.4",
-        "spatie/laravel-activitylog": "^5.1.1",
-        "illuminate/contracts": "^13.32.0"
-    },
-    "suggest": {
-        "maatwebsite/excel": "Required for exporting activity logs to XLSX format.",
-        "barryvdh/laravel-dompdf": "Required for exporting activity logs to PDF format."
+        "illuminate/contracts": "^13.32.0",
+        "paperdoc-dev/paperdoc-lib": "^1.1",
+        "spatie/laravel-activitylog": "^5.1.1"
     },
     "require-dev": {
         "orchestra/testbench": "^11.2.0",
