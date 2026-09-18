@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Exports;
+namespace WgVn\ActivitylogUi\Exports;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;

@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Eloquent;
+namespace WgVn\ActivitylogUi\Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 

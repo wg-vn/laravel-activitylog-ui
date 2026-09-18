@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Jobs;
+namespace WgVn\ActivitylogUi\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,8 +10,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
-use MuhammadSadeeq\ActivitylogUi\Services\ExportService;
-use MuhammadSadeeq\ActivitylogUi\Mail\ExportCompletedMail;
+use WgVn\ActivitylogUi\Services\ExportService;
+use WgVn\ActivitylogUi\Mail\ExportCompletedMail;
 
 class ExportActivitiesJob implements ShouldQueue
 {

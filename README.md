@@ -58,18 +58,18 @@ composer require maatwebsite/excel barryvdh/laravel-dompdf
 
 1. **Install the package**
    ```bash
-   composer require muhammadsadeeq/laravel-activitylog-ui
+   composer require wg-vn/laravel-activitylog-ui
    ```
 2. **(Optional) Publish resources**
    ```bash
    # Config file (config/activitylog-ui.php)
-   php artisan vendor:publish --provider="MuhammadSadeeq\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-config"
+   php artisan vendor:publish --provider="WgVn\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-config"
 
    # Blade views (if you want to customise)
-   php artisan vendor:publish --provider="MuhammadSadeeq\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-views"
+   php artisan vendor:publish --provider="WgVn\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-views"
 
    # Public assets (logo, js, css)
-   php artisan vendor:publish --provider="MuhammadSadeeq\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-assets"
+   php artisan vendor:publish --provider="WgVn\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-assets"
    ```
 3. **Run migrations**   
    Ensure you have already run Spatie’s migrations so the `activity_log` table exists:
@@ -82,7 +82,7 @@ composer require maatwebsite/excel barryvdh/laravel-dompdf
    everything newest first, which nothing indexes — on a log of 200,000 rows
    MySQL answers a single page by reading every row and sorting the lot.
    ```bash
-   php artisan vendor:publish --provider="MuhammadSadeeq\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-migrations"
+   php artisan vendor:publish --provider="WgVn\ActivitylogUi\ActivitylogUiServiceProvider" --tag="activitylog-ui-migrations"
    php artisan migrate
    ```
    Measured on 204,963 activities, this took the first page from 350&nbsp;ms to
@@ -208,5 +208,5 @@ PRs and issues are welcome!
 
 The MIT License (MIT).  See `LICENSE` for details. 
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/muhammadsadeeq/laravel-activitylog-ui.svg?style=flat-square)](https://packagist.org/packages/muhammadsadeeq/laravel-activitylog-ui)
-[![Total Downloads](https://img.shields.io/packagist/dt/muhammadsadeeq/laravel-activitylog-ui.svg?style=flat-square)](https://packagist.org/packages/muhammadsadeeq/laravel-activitylog-ui)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/wg-vn/laravel-activitylog-ui.svg?style=flat-square)](https://packagist.org/packages/wg-vn/laravel-activitylog-ui)
+[![Total Downloads](https://img.shields.io/packagist/dt/wg-vn/laravel-activitylog-ui.svg?style=flat-square)](https://packagist.org/packages/wg-vn/laravel-activitylog-ui)

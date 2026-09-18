@@ -1,12 +1,12 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Console;
+namespace WgVn\ActivitylogUi\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
-use MuhammadSadeeq\ActivitylogUi\Eloquent\MorphTypes;
-use MuhammadSadeeq\ActivitylogUi\Models\Activity;
-use MuhammadSadeeq\ActivitylogUi\Services\ActivitylogService;
+use WgVn\ActivitylogUi\Eloquent\MorphTypes;
+use WgVn\ActivitylogUi\Models\Activity;
+use WgVn\ActivitylogUi\Services\ActivitylogService;
 
 class ClearCacheCommand extends Command
 {

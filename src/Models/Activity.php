@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Models;
+namespace WgVn\ActivitylogUi\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -10,8 +10,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\ValidationException;
-use MuhammadSadeeq\ActivitylogUi\Eloquent\MorphTypes;
-use MuhammadSadeeq\ActivitylogUi\Eloquent\SafeMorphTo;
+use WgVn\ActivitylogUi\Eloquent\MorphTypes;
+use WgVn\ActivitylogUi\Eloquent\SafeMorphTo;
 use Spatie\Activitylog\Contracts\Activity as ActivityContract;
 use Spatie\Activitylog\Models\Activity as SpatieActivity;
 

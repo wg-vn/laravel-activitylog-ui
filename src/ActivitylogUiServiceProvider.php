@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi;
+namespace WgVn\ActivitylogUi;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -23,9 +23,9 @@ class ActivitylogUiServiceProvider extends ServiceProvider
         );
 
         // Register services
-        $this->app->singleton(\MuhammadSadeeq\ActivitylogUi\Services\ActivitylogService::class);
-        $this->app->singleton(\MuhammadSadeeq\ActivitylogUi\Services\AnalyticsService::class);
-        $this->app->singleton(\MuhammadSadeeq\ActivitylogUi\Services\ExportService::class);
+        $this->app->singleton(\WgVn\ActivitylogUi\Services\ActivitylogService::class);
+        $this->app->singleton(\WgVn\ActivitylogUi\Services\AnalyticsService::class);
+        $this->app->singleton(\WgVn\ActivitylogUi\Services\ExportService::class);
     }
 
     /**
@@ -94,7 +94,7 @@ class ActivitylogUiServiceProvider extends ServiceProvider
     protected function registerMiddleware(): void
     {
         $router = $this->app['router'];
-        $router->aliasMiddleware('activitylog-access', \MuhammadSadeeq\ActivitylogUi\Http\Middleware\ActivityLogAccessMiddleware::class);
+        $router->aliasMiddleware('activitylog-access', \WgVn\ActivitylogUi\Http\Middleware\ActivityLogAccessMiddleware::class);
     }
 
     /**
@@ -104,7 +104,7 @@ class ActivitylogUiServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \MuhammadSadeeq\ActivitylogUi\Console\ClearCacheCommand::class,
+                \WgVn\ActivitylogUi\Console\ClearCacheCommand::class,
             ]);
         }
     }

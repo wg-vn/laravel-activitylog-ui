@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use MuhammadSadeeq\ActivitylogUi\Models\Activity;
+use WgVn\ActivitylogUi\Models\Activity;
 
 /**
  * Index the activity log for the way this UI reads it.

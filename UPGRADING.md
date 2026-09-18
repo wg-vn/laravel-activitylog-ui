@@ -119,7 +119,7 @@ optional in v5. See Spatie's own upgrade guide for the complete rename table.
 ## Step 2: Update this package
 
 ```bash
-composer require muhammadsadeeq/laravel-activitylog-ui:"^3.0"
+composer require wg-vn/laravel-activitylog-ui:"^3.0"
 ```
 
 ### Authorization now defaults to on

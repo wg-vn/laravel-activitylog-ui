@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Http\Controllers;
+namespace WgVn\ActivitylogUi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -9,9 +9,9 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
-use MuhammadSadeeq\ActivitylogUi\Models\Activity;
-use MuhammadSadeeq\ActivitylogUi\Services\ActivitylogService;
-use MuhammadSadeeq\ActivitylogUi\Services\AnalyticsService;
+use WgVn\ActivitylogUi\Models\Activity;
+use WgVn\ActivitylogUi\Services\ActivitylogService;
+use WgVn\ActivitylogUi\Services\AnalyticsService;
 
 class ActivityLogController extends Controller
 {

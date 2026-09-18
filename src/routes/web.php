@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use MuhammadSadeeq\ActivitylogUi\Http\Controllers\ActivityLogController;
-use MuhammadSadeeq\ActivitylogUi\Http\Controllers\AssetController;
-use MuhammadSadeeq\ActivitylogUi\Http\Controllers\ExportController;
+use WgVn\ActivitylogUi\Http\Controllers\ActivityLogController;
+use WgVn\ActivitylogUi\Http\Controllers\AssetController;
+use WgVn\ActivitylogUi\Http\Controllers\ExportController;
 
 $config = config('activitylog-ui.route', []);
 $prefix = $config['prefix'] ?? 'activitylog-ui';
@@ -30,7 +30,7 @@ if (
     || config('activitylog-ui.access.allowed_users')
     || config('activitylog-ui.access.allowed_roles')
 ) {
-    $middleware = \MuhammadSadeeq\ActivitylogUi\Support\RouteMiddleware::protect($middleware);
+    $middleware = \WgVn\ActivitylogUi\Support\RouteMiddleware::protect($middleware);
 }
 
 $domain = $config['domain'] ?? null;

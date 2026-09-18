@@ -1,5 +1,5 @@
 {
-    "name": "muhammadsadeeq/laravel-activitylog-ui",
+    "name": "wg-vn/laravel-activitylog-ui",
     "description": "A beautiful, modern UI for Spatie's Activity Log with advanced filtering, analytics, and real-time features.",
     "keywords": [
         "spatie",
@@ -24,36 +24,41 @@
         "logging",
         "monitoring"
     ],
-    "homepage": "https://github.com/MuhammadSadeeq/laravel-activitylog-ui",
+    "homepage": "https://github.com/wg-vn/laravel-activitylog-ui",
     "license": "MIT",
     "authors": [
         {
             "name": "Muhammad Sadeeq",
             "email": "afridi.sadeeq.m@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "Werner Garcia",
+            "email": "wgarcia@vestednetworks.com",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.4",
-        "spatie/laravel-activitylog": "^5.0",
-        "illuminate/contracts": "^12.0|^13.0"
+        "spatie/laravel-activitylog": "^5.1.1",
+        "illuminate/contracts": "^13.32.0"
     },
     "suggest": {
         "maatwebsite/excel": "Required for exporting activity logs to XLSX format.",
         "barryvdh/laravel-dompdf": "Required for exporting activity logs to PDF format."
     },
     "require-dev": {
-        "orchestra/testbench": "^10.0|^11.0",
+        "orchestra/testbench": "^11.2.0",
         "phpunit/phpunit": "^11.0"
     },
     "autoload": {
         "psr-4": {
-            "MuhammadSadeeq\\ActivitylogUi\\": "src/"
+            "WgVn\\ActivitylogUi\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MuhammadSadeeq\\ActivitylogUi\\Tests\\": "tests/"
+            "WgVn\\ActivitylogUi\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -66,7 +71,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MuhammadSadeeq\\ActivitylogUi\\ActivitylogUiServiceProvider"
+                "WgVn\\ActivitylogUi\\ActivitylogUiServiceProvider"
             ]
         }
     },

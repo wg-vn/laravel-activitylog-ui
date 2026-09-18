@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Services;
+namespace WgVn\ActivitylogUi\Services;
 
 use Illuminate\Contracts\Cache\Lock;
 use Illuminate\Contracts\Cache\LockProvider;
@@ -10,7 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use MuhammadSadeeq\ActivitylogUi\Models\Activity;
+use WgVn\ActivitylogUi\Models\Activity;
 
 class ActivitylogService
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Services;
+namespace WgVn\ActivitylogUi\Services;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
-use MuhammadSadeeq\ActivitylogUi\Models\Activity;
-use MuhammadSadeeq\ActivitylogUi\Exports\ActivitiesExport;
+use WgVn\ActivitylogUi\Models\Activity;
+use WgVn\ActivitylogUi\Exports\ActivitiesExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class ExportService
@@ -330,7 +330,7 @@ class ExportService
                 'total_records' => $activities->count(),
                 'filters_applied' => $options['applied_filters'] ?? [],
                 'export_options' => $options,
-                'version' => \MuhammadSadeeq\ActivitylogUi\ActivitylogUiServiceProvider::VERSION,
+                'version' => \WgVn\ActivitylogUi\ActivitylogUiServiceProvider::VERSION,
             ],
             'activities' => $activities->map(function ($activity) {
                 return [
@@ -649,7 +649,7 @@ class ExportService
             cache()->put("export_job_{$jobId}", $initialStatus, now()->addHours(24));
 
             // Dispatch the job
-            $job = new \MuhammadSadeeq\ActivitylogUi\Jobs\ExportActivitiesJob($jobId, $filters, $format, $options, $userId);
+            $job = new \WgVn\ActivitylogUi\Jobs\ExportActivitiesJob($jobId, $filters, $format, $options, $userId);
             dispatch($job);
         } catch (\Throwable $e) {
             \Log::error('Failed to queue export job', [

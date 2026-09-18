@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Http\Controllers;
+namespace WgVn\ActivitylogUi\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +10,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Gate;
-use MuhammadSadeeq\ActivitylogUi\Services\ExportService;
+use WgVn\ActivitylogUi\Services\ExportService;
 
 class ExportController extends Controller
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Services;
+namespace WgVn\ActivitylogUi\Services;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Carbon;
@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use MuhammadSadeeq\ActivitylogUi\Models\Activity;
+use WgVn\ActivitylogUi\Models\Activity;
 
 class AnalyticsService
 {

@@ -25,7 +25,7 @@
         The typeface is the system stack for the same reason: no webfont
         request, no swap, and it looks native wherever it runs.
     --}}
-    <link rel="stylesheet" href="{{ route('activitylog-ui.assets.css', ['version' => \MuhammadSadeeq\ActivitylogUi\Http\Controllers\AssetController::version()]) }}">
+    <link rel="stylesheet" href="{{ route('activitylog-ui.assets.css', ['version' => \WgVn\ActivitylogUi\Http\Controllers\AssetController::version()]) }}">
 
     <script>
         // Applied before first paint so the page never flashes light then dark.

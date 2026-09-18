@@ -1,9 +1,9 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Support;
+namespace WgVn\ActivitylogUi\Support;
 
-use MuhammadSadeeq\ActivitylogUi\Http\Middleware\ActivityLogAccessMiddleware;
-use MuhammadSadeeq\ActivitylogUi\Http\Middleware\AuthenticateActivityLogUser;
+use WgVn\ActivitylogUi\Http\Middleware\ActivityLogAccessMiddleware;
+use WgVn\ActivitylogUi\Http\Middleware\AuthenticateActivityLogUser;
 
 /**
  * Builds the route middleware stack for the UI.

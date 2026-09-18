@@ -1,6 +1,6 @@
 <?php
 
-namespace MuhammadSadeeq\ActivitylogUi\Http\Middleware;
+namespace WgVn\ActivitylogUi\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Middleware\Authenticate;
