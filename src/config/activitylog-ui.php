@@ -163,6 +163,23 @@ return [
             'auto_run' => true,
         ],
 
+        // PDF export styling
+        'pdf' => [
+            // Font size (in points) for the report title
+            'heading_font_size' => 24,
+
+            // Font size (in points) for the summary paragraphs (Generated At,
+            // Total Records, Filters Applied)
+            'font_size' => 12,
+
+            // Font size (in points) for the activities table (header and body cells)
+            'table_font_size' => 12,
+
+            // Default page orientation: 'portrait' or 'landscape'.
+            // Overridden per-request by passing options.orientation.
+            'orientation' => 'landscape',
+        ],
+
         // Export notification settings
         'notifications' => [
             // Notify users when queued exports are complete

@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\App;
+use Paperdoc\Document\Paragraph;
 use Paperdoc\Document\Style\PageSetup;
+use Paperdoc\Document\Style\ParagraphStyle;
+use Paperdoc\Document\Style\TextStyle;
 use Paperdoc\Document\Table;
+use Paperdoc\Document\TextRun;
 use Paperdoc\Enum\PageSize;
 use Paperdoc\Facades\Paperdoc;
 use WgVn\ActivitylogUi\Models\Activity;
@@ -293,16 +297,33 @@ class ExportService
         $generatedAt = now();
         $filters = $options['applied_filters'] ?? [];
 
+        $bodyFontSize = (float) config('activitylog-ui.exports.pdf.font_size', 12.0);
+        $tableFontSize = (float) config('activitylog-ui.exports.pdf.table_font_size', 12.0);
+        $headingFontSize = (float) config('activitylog-ui.exports.pdf.heading_font_size', 24.0);
+
         $doc = Paperdoc::create('pdf', $title);
+        // Table cells always fall back to the document's default text style —
+        // Table::addRowFromArray() has no per-cell style argument — so this
+        // controls the table only, independently of the body paragraphs below.
+        $doc->setDefaultTextStyle(TextStyle::make()->setFontSize($tableFontSize));
         $section = $doc->openSection();
 
-        if (($options['orientation'] ?? 'portrait') === 'landscape') {
+        $orientation = $options['orientation'] ?? config('activitylog-ui.exports.pdf.orientation', 'landscape');
+
+        if ($orientation === 'landscape') {
             $section->setPageSize(PageSize::A4, PageSetup::ORIENTATION_LANDSCAPE);
         }
 
-        $section->addHeading($title, 1);
-        $section->addParagraph('Generated At: ' . $generatedAt->format('F j, Y \a\t g:i A T'));
-        $section->addParagraph('Total Records: ' . number_format($activities->count()));
+        // Built manually rather than through addHeading(), which hardcodes the
+        // level-1 font size to 24pt and takes no style argument.
+        $headingParagraph = new Paragraph(ParagraphStyle::make()->setHeadingLevel(1));
+        $headingParagraph->addRun(new TextRun($title, TextStyle::make()->setFontSize($headingFontSize)->setBold()));
+        $section->addElement($headingParagraph);
+
+        $bodyStyle = TextStyle::make()->setFontSize($bodyFontSize);
+
+        $section->addParagraph('Generated At: ' . $generatedAt->format('F j, Y \a\t g:i A T'), $bodyStyle);
+        $section->addParagraph('Total Records: ' . number_format($activities->count()), $bodyStyle);
 
         $filterSummary = collect($filters)
             ->filter()
@@ -310,7 +331,7 @@ class ExportService
             ->implode(', ');
 
         if ($filterSummary !== '') {
-            $section->addParagraph('Filters Applied: ' . $filterSummary);
+            $section->addParagraph('Filters Applied: ' . $filterSummary, $bodyStyle);
         }
 
         $section->addElement($this->buildActivitiesTable($activities, $options));

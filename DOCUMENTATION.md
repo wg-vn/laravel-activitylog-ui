@@ -171,6 +171,12 @@ The package configuration is located at `config/activitylog-ui.php`. Below are t
         'timeout' => 300,                // Job timeout in seconds
         'tries' => 3,                    // Number of retry attempts
     ],
+    'pdf' => [
+        'heading_font_size' => 24,        // Font size (points) of the report title
+        'font_size' => 12,                // Font size (points) of the summary paragraphs
+        'table_font_size' => 12,          // Font size (points) of the activities table
+        'orientation' => 'landscape',     // Default page orientation: 'portrait' or 'landscape'
+    ],
     'notifications' => [
         'enabled' => true,               // Send completion notifications
         'channels' => ['mail'],          // Notification channels
